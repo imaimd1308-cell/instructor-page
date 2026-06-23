@@ -59,47 +59,60 @@
       <section class="about-panel" aria-label="강사 소개">
         <div>
           <p class="eyebrow dark">Profile</p>
-          <h2>디지털과 사람 사이를 잇는 강의</h2>
+          <h2>AI와 디지털을 현장의 언어로 풀어내는 강사</h2>
           <p>
-            전자계산학 전공, 14년간 SKC 전산실 근무, 20년간 IT 회사 운영 경험을 바탕으로
-            기술을 어렵지 않은 실습으로 연결합니다. 2022년부터 디지털 강사로 활동하고 있으며,
-            2026년부터 AI 융합비즈포럼 수석연구원으로 함께하고 있습니다.
+            시디놀(임만식)은 전자계산학을 전공하고, 14년간 SKC 전산실 근무,
+            20년간 IT 회사를 운영한 IT 현장 기반의 디지털 강사입니다.
+            2022년부터 디지털 강사로 활동하며 생성형 AI, AI 에이전트,
+            스마트폰, 컴퓨터, 키오스크 등 생활과 업무에 바로 쓰이는
+            디지털·AI 강의를 진행하고 있습니다.
           </p>
         </div>
         <div class="credential-list">
           <span>AI-POT(KPC)</span>
           <span>AI 활용 마스터</span>
           <span>정보처리기사</span>
-          <span>사회복지사</span>
           <span>스마트폰활용지도사</span>
-          <span>시집 『해는 어느 한 곳으로만 지지 않는다』 출간</span>
+          <span>사회복지사</span>
+          <a class="book-link" href="https://product.kyobobook.co.kr/book/preview/S000219388189">시집 『해는 어느 한 곳으로만 지지 않는다』 <strong>클릭</strong></a>
         </div>
       </section>
 
       <section class="course-section" id="open-section">
         <div class="section-title">
-          <span>Open</span>
-          <h2>신청 가능한 강의</h2>
+          <h2>모집 강의 <span class="label-open">Open</span></h2>
         </div>
         <div class="course-list" id="openCourses"></div>
       </section>
 
-      <section class="course-section">
+      <section class="course-section" id="active-section">
         <div class="section-title">
-          <span>Now</span>
-          <h2>진행 중인 강의</h2>
+          <h2>진행 강의 <span class="label-now">Now</span></h2>
         </div>
-        <div class="course-list" id="activeCourses"></div>
+        <div class="course-list compact" id="activeCourses"></div>
       </section>
 
-      <section class="course-section">
+      <section class="course-section" id="past-section">
         <div class="section-title">
-          <span>Archive</span>
-          <h2>강의 이력</h2>
+          <h2>강의 이력 <span class="label-archive">Archive</span></h2>
+          <select class="history-filter" id="historyFilter" aria-label="강의 이력 기관 필터">
+            <option value="">전체 기관</option>
+          </select>
         </div>
         <div class="course-list compact" id="pastCourses"></div>
       </section>
     </main>
+
+    <div class="modal" id="courseModal" aria-hidden="true">
+      <div class="modal-backdrop" data-close-modal></div>
+      <article class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" type="button" aria-label="닫기" data-close-modal>×</button>
+        <h3 id="modalTitle"></h3>
+        <div class="modal-meta" id="modalMeta"></div>
+        <p class="modal-summary" id="modalSummary"></p>
+        <div class="tag-row" id="modalTags"></div>
+      </article>
+    </div>
 
     <script src="./app.js"></script>
   </body>

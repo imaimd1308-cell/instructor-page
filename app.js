@@ -23,6 +23,10 @@ const columns = {
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 
+let detailCourses = [];
+let activeCourses = [];
+let pastCourses = [];
+
 function parseCsv(text) {
   const rows = [];
   let row = [];
@@ -104,12 +108,18 @@ function formatDate(date) {
   return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, "0")}.${String(date.getDate()).padStart(2, "0")}`;
 }
 
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 function getBadges(course) {
   const badges = [];
-  if (course.applyStart && course.applyStart > today) badges.push(["모집예정", "open"]);
+  if (course.applyStart && course.applyStart > today) badges.push(["모집예정", "upcoming"]);
   if (isBetween(course.applyStart, course.applyEnd)) badges.push(["모집중", "open"]);
-  if (isBetween(course.courseStart, course.courseEnd)) badges.push(["진행중", "active"]);
-  if (course.courseEnd && course.courseEnd < today) badges.push(["종료", "closed"]);
   return badges;
 }
 
@@ -164,19 +174,63 @@ function renderList(id, courses, emptyText) {
     : `<div class="empty">${emptyText}</div>`;
 }
 
+function courseRow(course, index) {
+  return `
+    <button class="course-row" type="button" data-course-index="${index}">
+      <strong>${escapeHtml(course.title)}</strong>
+      <span>${escapeHtml(course.organization)}</span>
+      <em>${formatDate(course.courseStart)} - ${formatDate(course.courseEnd)}</em>
+    </button>
+  `;
+}
+
+function renderCompactList(id, courses, emptyText, indexOffset) {
+  const target = document.querySelector(`#${id}`);
+  target.innerHTML = courses.length
+    ? courses.map((course, index) => courseRow(course, index + indexOffset)).join("")
+    : `<div class="empty">${emptyText}</div>`;
+}
+
+function renderHistory(filter = "") {
+  const filteredPast = filter
+    ? pastCourses.filter((course) => course.organization === filter).sort(compareByCourseStartDesc)
+    : [...pastCourses].sort(compareByCourseStartDesc);
+
+  detailCourses = [...activeCourses, ...filteredPast];
+  renderCompactList("pastCourses", filteredPast, "조건에 맞는 강의 이력이 없습니다.", activeCourses.length);
+}
+
+function renderHistoryFilter(courses) {
+  const filter = document.querySelector("#historyFilter");
+  const organizations = [...new Set(courses.map((course) => course.organization).filter(Boolean))].sort((a, b) =>
+    a.localeCompare(b, "ko")
+  );
+
+  filter.innerHTML = `
+    <option value="">전체 기관</option>
+    ${organizations.map((organization) => `<option value="${escapeHtml(organization)}">${escapeHtml(organization)}</option>`).join("")}
+  `;
+}
+
 function renderStats(courses, open, active, past) {
   document.querySelector("#stats").innerHTML = `
-    <article class="stat-card"><strong>${open.length}</strong><span>신청 가능한 강의</span></article>
-    <article class="stat-card"><strong>${active.length}</strong><span>진행 중인 강의</span></article>
-    <article class="stat-card"><strong>${past.length}</strong><span>강의 이력</span></article>
+    <a class="stat-card" href="#open-section"><span class="stat-open">모집중</span><strong>${open.length}</strong></a>
+    <a class="stat-card" href="#active-section"><span class="stat-now">진행중</span><strong>${active.length}</strong></a>
+    <a class="stat-card" href="#past-section"><span class="stat-archive">강의 이력</span><strong>${past.length}</strong></a>
   `;
+}
+
+function compareByCourseStartDesc(a, b) {
+  return b.courseStart - a.courseStart || b.courseEnd - a.courseEnd || a.title.localeCompare(b.title, "ko");
 }
 
 function classify(courses) {
   const sorted = [...courses].sort((a, b) => a.sort - b.sort);
   const open = sorted.filter((course) => course.applyEnd && today <= course.applyEnd);
-  const active = sorted.filter((course) => isBetween(course.courseStart, course.courseEnd));
-  const past = sorted.filter((course) => course.courseEnd && course.courseEnd < today);
+  const active = sorted.filter((course) => isBetween(course.courseStart, course.courseEnd)).sort(compareByCourseStartDesc);
+  const past = sorted
+    .filter((course) => course.courseEnd && course.courseEnd < today)
+    .sort(compareByCourseStartDesc);
 
   return { open, active, past };
 }
@@ -187,17 +241,50 @@ document.addEventListener("click", (event) => {
   alert(button.dataset.message);
 });
 
+document.addEventListener("click", (event) => {
+  const row = event.target.closest("[data-course-index]");
+  if (!row) return;
+
+  const course = detailCourses[Number(row.dataset.courseIndex)];
+  if (!course) return;
+
+  document.querySelector("#modalTitle").textContent = course.title;
+  document.querySelector("#modalMeta").innerHTML = `
+    <span>${escapeHtml(course.organization)} · ${escapeHtml(course.target)}</span>
+    <span>${formatDate(course.courseStart)} - ${formatDate(course.courseEnd)}</span>
+    <span>${escapeHtml(course.time)} · ${escapeHtml(course.sessions)}회차</span>
+  `;
+  document.querySelector("#modalSummary").textContent = course.summary;
+  document.querySelector("#modalTags").innerHTML = course.tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
+  document.querySelector("#courseModal").classList.add("is-open");
+  document.querySelector("#courseModal").setAttribute("aria-hidden", "false");
+});
+
+document.addEventListener("click", (event) => {
+  if (!event.target.closest("[data-close-modal]")) return;
+  document.querySelector("#courseModal").classList.remove("is-open");
+  document.querySelector("#courseModal").setAttribute("aria-hidden", "true");
+});
+
+document.querySelector("#historyFilter").addEventListener("change", (event) => {
+  renderHistory(event.target.value);
+});
+
 async function init() {
   try {
-    const response = await fetch(SHEET_CSV_URL);
+    const response = await fetch(`${SHEET_CSV_URL}&v=${Date.now()}`);
     const rows = parseCsv(await response.text());
     const courses = rows.map(normalizeCourse).filter((course) => course.visible);
     const { open, active, past } = classify(courses);
+    activeCourses = active;
+    pastCourses = past;
+    detailCourses = [...activeCourses, ...pastCourses];
 
     renderStats(courses, open, active, past);
     renderList("openCourses", open, "현재 신청 가능한 강의가 없습니다.");
-    renderList("activeCourses", active, "현재 진행 중인 강의가 없습니다.");
-    renderList("pastCourses", past, "아직 표시할 강의 이력이 없습니다.");
+    renderCompactList("activeCourses", active, "현재 진행 중인 강의가 없습니다.", 0);
+    renderHistoryFilter(courses);
+    renderHistory();
   } catch (error) {
     document.querySelector("#stats").innerHTML = `<div class="empty">구글시트 데이터를 불러오지 못했습니다.</div>`;
   }
