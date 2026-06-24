@@ -64,14 +64,14 @@ body {
 
 .lead-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 72px;
+  grid-template-columns: minmax(0, 1fr) 92px;
   align-items: stretch;
   gap: 12px;
   margin-top: 20px;
 }
 
 .hero-photo {
-  width: 72px;
+  width: 92px;
   height: 100%;
   min-height: 100%;
   border: 2px solid rgba(255, 255, 255, 0.72);
@@ -712,8 +712,12 @@ h2 {
   }
 
   .lead-row {
-    grid-template-columns: minmax(0, 1fr) 72px;
-    gap: 10px;
+    grid-template-columns: minmax(0, 1fr) 84px;
+    gap: 8px;
+  }
+
+  .hero-photo {
+    width: 84px;
   }
 
   .course-list,
