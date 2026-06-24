@@ -120,28 +120,45 @@ h1 {
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
   background: linear-gradient(160deg, #12365f 0%, #1d5d8f 100%);
-  padding: 22px;
+  padding: 18px;
   backdrop-filter: blur(14px);
   box-shadow: 0 22px 42px rgba(4, 17, 35, 0.28);
 }
 
+.profile-card-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 88px;
+  align-items: center;
+  gap: 14px;
+}
+
 .profile-card strong {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: #ffffff;
   font-size: 1.18rem;
 }
 
 .profile-card p {
   color: rgba(255, 255, 255, 0.82);
-  line-height: 1.58;
+  line-height: 1.48;
+}
+
+.profile-photo {
+  width: 88px;
+  height: 112px;
+  border: 3px solid rgba(255, 255, 255, 0.72);
+  border-radius: 999px;
+  object-fit: cover;
+  object-position: center 28%;
+  box-shadow: 0 14px 26px rgba(4, 17, 35, 0.32);
 }
 
 .profile-links {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
 .profile-links a {
@@ -681,6 +698,16 @@ h2 {
 
   .hero-grid {
     gap: 22px;
+  }
+
+  .profile-card-content {
+    grid-template-columns: minmax(0, 1fr) 82px;
+    gap: 12px;
+  }
+
+  .profile-photo {
+    width: 82px;
+    height: 104px;
   }
 
   .course-list,
