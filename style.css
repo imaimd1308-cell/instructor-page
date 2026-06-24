@@ -27,7 +27,7 @@ body {
   margin: 0;
   background:
     radial-gradient(circle at top right, rgba(125, 216, 255, 0.24), transparent 28rem),
-    linear-gradient(180deg, #07182f 0, #0b1e39 360px, var(--paper) 361px);
+    linear-gradient(180deg, #07182f 0, #0b1e39 440px, var(--paper) 441px);
   color: var(--ink);
   font-family:
     Pretendard,
@@ -53,9 +53,9 @@ body {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
+  grid-template-columns: minmax(0, 1fr) 360px;
   align-items: center;
-  gap: 34px;
+  gap: 28px;
 }
 
 .hero-copy {
@@ -199,7 +199,7 @@ h1 {
 .news-link em {
   display: inline-block;
   min-width: 28px;
-  color: var(--navy);
+  color: #1d5d8f;
   font-size: 0.9rem;
   font-style: normal;
   font-weight: 950;
