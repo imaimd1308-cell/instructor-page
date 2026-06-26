@@ -27,6 +27,7 @@ today.setHours(0, 0, 0, 0);
 let detailCourses = [];
 let activeCourses = [];
 let pastCourses = [];
+let featuredCourse = null;
 
 function parseCsv(text) {
   const rows = [];
@@ -189,14 +190,50 @@ function renderFeaturedCourse(courses) {
   }
 
   target.hidden = false;
+  featuredCourse = featured;
   target.innerHTML = `
     <span class="featured-course-stamp">신규<br />개설</span>
     <div class="featured-course-copy">
       <h2>${escapeHtml(featured.title)}</h2>
       <p class="featured-course-date">강의 시작 <strong>${formatDate(featured.courseStart)}</strong></p>
     </div>
-    <a class="featured-course-link" href="#open-section">강의 보기</a>
+    <button class="featured-course-link" type="button" data-featured-course>강의 보기</button>
   `;
+}
+
+function featuredApply(course) {
+  const applyState = getApplyState(course);
+
+  if (applyState.message) {
+    return `<button class="apply-button muted" type="button" data-message="${applyState.message}">${applyState.label}</button>`;
+  }
+
+  if (course.applyLink) {
+    return `<a class="apply-button" href="${course.applyLink}" target="_blank" rel="noreferrer">${applyState.label}</a>`;
+  }
+
+  if (course.applyMethod) {
+    return `<button class="apply-button" type="button" data-message="${course.applyMethod}">${applyState.label}</button>`;
+  }
+
+  return "";
+}
+
+function openFeaturedModal(course) {
+  document.querySelector("#modalBadges").innerHTML = getBadges(course)
+    .map(([label, type]) => `<span class="badge ${type}">${label}</span>`)
+    .join("");
+  document.querySelector("#modalTitle").textContent = course.title;
+  document.querySelector("#modalMeta").innerHTML = `
+    <span>${escapeHtml(course.organization)} · ${escapeHtml(course.target)} · ${escapeHtml(course.format)}</span>
+    <span>${formatDate(course.courseStart)} - ${formatDate(course.courseEnd)}</span>
+    <span>${escapeHtml(course.time)} · ${escapeHtml(course.sessions)}회차</span>
+  `;
+  document.querySelector("#modalSummary").textContent = course.summary;
+  document.querySelector("#modalTags").innerHTML = course.tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
+  document.querySelector("#modalApply").innerHTML = featuredApply(course);
+  document.querySelector("#courseModal").classList.add("is-open");
+  document.querySelector("#courseModal").setAttribute("aria-hidden", "false");
 }
 
 function courseRow(course, index) {
@@ -264,6 +301,11 @@ document.addEventListener("click", (event) => {
   const button = event.target.closest("[data-message]");
   if (!button) return;
   alert(button.dataset.message);
+});
+
+document.addEventListener("click", (event) => {
+  if (!event.target.closest("[data-featured-course]") || !featuredCourse) return;
+  openFeaturedModal(featuredCourse);
 });
 
 document.addEventListener("click", (event) => {
