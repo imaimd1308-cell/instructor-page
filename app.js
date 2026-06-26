@@ -3,6 +3,7 @@ const SHEET_CSV_URL =
 
 const columns = {
   visible: "노출",
+  featured: "추천노출",
   title: "강좌명",
   organization: "기관",
   target: "대상",
@@ -85,6 +86,7 @@ function isBetween(start, end) {
 function normalizeCourse(row) {
   return {
     visible: row[columns.visible] === "T",
+    featured: row[columns.featured] === "T",
     title: row[columns.title],
     organization: row[columns.organization],
     target: row[columns.target],
@@ -172,6 +174,29 @@ function renderList(id, courses, emptyText) {
   target.innerHTML = courses.length
     ? courses.map(courseCard).join("")
     : `<div class="empty">${emptyText}</div>`;
+}
+
+function renderFeaturedCourse(courses) {
+  const target = document.querySelector("#featuredCourse");
+  const featured = courses
+    .filter((course) => course.featured && (!course.applyEnd || today <= course.applyEnd))
+    .sort((a, b) => a.sort - b.sort)[0];
+
+  if (!featured) {
+    target.hidden = true;
+    target.innerHTML = "";
+    return;
+  }
+
+  target.hidden = false;
+  target.innerHTML = `
+    <span class="featured-course-stamp">신규<br />개설</span>
+    <div class="featured-course-copy">
+      <h2>${escapeHtml(featured.title)}</h2>
+      <p class="featured-course-date">강의 시작 <strong>${formatDate(featured.courseStart)}</strong></p>
+    </div>
+    <a class="featured-course-link" href="#open-section">강의 보기</a>
+  `;
 }
 
 function courseRow(course, index) {
@@ -280,6 +305,7 @@ async function init() {
     pastCourses = past;
     detailCourses = [...activeCourses, ...pastCourses];
 
+    renderFeaturedCourse(courses);
     renderStats(courses, open, active, past);
     renderList("openCourses", open, "현재 신청 가능한 강의가 없습니다.");
     renderCompactList("activeCourses", active, "현재 진행 중인 강의가 없습니다.", 0);
