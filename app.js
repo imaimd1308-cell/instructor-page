@@ -28,6 +28,7 @@ let detailCourses = [];
 let activeCourses = [];
 let pastCourses = [];
 let featuredCourse = null;
+let featuredCourses = [];
 
 function parseCsv(text) {
   const rows = [];
@@ -179,26 +180,28 @@ function renderList(id, courses, emptyText) {
 
 function renderFeaturedCourse(courses) {
   const target = document.querySelector("#featuredCourse");
-  const featured = courses
+  featuredCourses = courses
     .filter((course) => course.featured && (!course.applyEnd || today <= course.applyEnd))
-    .sort((a, b) => a.sort - b.sort)[0];
+    .sort((a, b) => a.sort - b.sort);
 
-  if (!featured) {
+  if (!featuredCourses.length) {
     target.hidden = true;
     target.innerHTML = "";
     return;
   }
 
   target.hidden = false;
-  featuredCourse = featured;
-  target.innerHTML = `
+  featuredCourse = featuredCourses[0];
+  target.innerHTML = featuredCourses.map((featured, index) => `
+    <article class="featured-course-item">
     <span class="featured-course-stamp">신규<br />개설</span>
     <div class="featured-course-copy">
       <h2>${escapeHtml(featured.title)}</h2>
       <p class="featured-course-date">강의 시작 <strong>${formatDate(featured.courseStart)}</strong></p>
     </div>
     <button class="featured-course-link" type="button" data-featured-course>강의 보기</button>
-  `;
+    </article>
+  `).join("");
 }
 
 function featuredApply(course) {
@@ -304,8 +307,12 @@ document.addEventListener("click", (event) => {
 });
 
 document.addEventListener("click", (event) => {
-  if (!event.target.closest("[data-featured-course]") || !featuredCourse) return;
-  openFeaturedModal(featuredCourse);
+  const trigger = event.target.closest("[data-featured-course]");
+  if (!trigger) return;
+  const buttons = [...document.querySelectorAll("[data-featured-course]")];
+  const course = featuredCourses[buttons.indexOf(trigger)];
+  if (!course) return;
+  openFeaturedModal(course);
 });
 
 document.addEventListener("click", (event) => {
