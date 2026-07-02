@@ -209,7 +209,7 @@ h1 {
   grid-template-columns: 92px minmax(0, 1fr) auto;
   align-items: center;
   gap: 18px;
-  padding: 14px 18px;
+  padding: 8px 18px;
   border: 1px solid rgba(255, 210, 205, 0.32);
   border-radius: 8px;
   background: linear-gradient(135deg, #6e2833, #9a3d46);
@@ -820,7 +820,7 @@ h2 {
     grid-template-columns: 72px minmax(0, 1fr) auto;
     align-items: center;
     gap: 10px;
-    padding: 14px 16px;
+    padding: 8px 16px;
   }
 
   .featured-course-preview h2 {
