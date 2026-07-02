@@ -382,8 +382,62 @@ h1 {
   color: var(--cyan);
 }
 
+.about-heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
 .about-panel h2 {
+  display: inline;
+  flex: 0 1 auto;
   color: #ffffff;
+}
+
+.title-tail {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.theme-song-play {
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #12365f;
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 900;
+}
+
+.theme-song-play em {
+  color: #1d5d8f;
+  font-style: normal;
+  font-weight: 950;
+}
+
+.theme-song-play span {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #1d5d8f;
+  color: #ffffff;
+  font-size: 0.66rem;
+}
+
+.theme-song-play.is-playing span {
+  background: #d64242;
 }
 
 .about-panel p {
@@ -841,6 +895,26 @@ h2 {
 
   .about-panel {
     margin: 10px 0;
+  }
+
+  .about-heading {
+    gap: 4px;
+  }
+
+  .about-panel h2 {
+    font-size: 1.48rem;
+  }
+
+  .theme-song-play {
+    min-height: 28px;
+    padding: 0 8px;
+    font-size: 0.76rem;
+  }
+
+  .theme-song-play span {
+    width: 17px;
+    height: 17px;
+    font-size: 0.56rem;
   }
 
   .course-section {

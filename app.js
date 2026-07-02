@@ -306,6 +306,26 @@ document.addEventListener("click", (event) => {
   alert(button.dataset.message);
 });
 
+const themeAudio = new Audio("./sidinol-theme.mp3");
+
+document.addEventListener("click", async (event) => {
+  const button = event.target.closest(".theme-song-play");
+  if (!button) return;
+  event.preventDefault();
+
+  try {
+    if (themeAudio.paused) {
+      await themeAudio.play();
+      button.classList.add("is-playing");
+    } else {
+      themeAudio.pause();
+      button.classList.remove("is-playing");
+    }
+  } catch {
+    alert("음악 파일을 재생하지 못했습니다.");
+  }
+});
+
 document.addEventListener("click", (event) => {
   const trigger = event.target.closest("[data-featured-course]");
   if (!trigger) return;
