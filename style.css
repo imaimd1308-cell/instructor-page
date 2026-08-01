@@ -935,13 +935,13 @@ h2 {
   .hero-actions {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 5px;
+    gap: 4px;
   }
 
   .hero-actions a {
     min-height: 36px;
-    padding: 0 3px;
-    font-size: 1rem;
+    padding: 0 2px;
+    font-size: 1.08rem;
     line-height: 1;
     overflow: hidden;
     text-overflow: clip;
