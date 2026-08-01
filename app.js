@@ -197,7 +197,7 @@ function renderFeaturedCourse(courses) {
   featuredCourse = featuredCourses[0];
   target.innerHTML = featuredCourses.map((featured, index) => `
     <article class="featured-course-item">
-    <span class="featured-course-stamp">신규<br />개설</span>
+    <span class="featured-course-stamp">신규</span>
     <div class="featured-course-copy">
       <h2>${escapeHtml(featured.title)}</h2>
       <p class="featured-course-date">강의 시작 <strong>${formatDate(featured.courseStart)}</strong></p>
