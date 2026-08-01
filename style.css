@@ -219,10 +219,10 @@ h1 {
 
 .featured-course-item {
   display: grid;
-  grid-template-columns: 92px minmax(0, 1fr) auto;
+  grid-template-columns: 68px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 18px;
-  padding: 8px 18px;
+  gap: 14px;
+  padding: 6px 16px;
   border: 1px solid rgba(255, 210, 205, 0.32);
   border-radius: 8px;
   background: linear-gradient(135deg, #6e2833, #9a3d46);
@@ -237,13 +237,13 @@ h1 {
 
 .featured-course-preview h2 {
   color: #fff;
-  font-size: 1.36rem;
+  font-size: 1.18rem;
 }
 
 .featured-course-date {
-  margin-top: 5px;
+  margin-top: 3px;
   color: rgba(255, 255, 255, 0.76);
-  font-size: 0.88rem;
+  font-size: 0.8rem;
   font-weight: 750;
 }
 
@@ -256,14 +256,14 @@ h1 {
 .featured-course-stamp {
   display: grid;
   place-items: center;
-  width: 82px;
-  height: 82px;
+  width: 58px;
+  height: 58px;
   border-radius: 28% 44% 34% 46%;
   background: linear-gradient(135deg, #f06a4e, #cf3543);
-  outline: 3px solid rgba(255, 244, 224, 0.84);
-  outline-offset: -8px;
+  outline: 2px solid rgba(255, 244, 224, 0.84);
+  outline-offset: -6px;
   color: #fff;
-  font-size: 0.98rem;
+  font-size: 1.08rem;
   font-weight: 950;
   line-height: 1.05;
   text-align: center;
@@ -278,12 +278,13 @@ h1 {
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
-  padding: 0 14px;
+  min-height: 34px;
+  padding: 0 12px;
   border-radius: 8px;
   background: #fff6f4;
   color: #762d37;
-  font-weight: 900;
+  font-size: 1.02rem;
+  font-weight: 950;
   text-decoration: none;
 }
 
@@ -988,26 +989,26 @@ h2 {
   }
 
   .featured-course-item {
-    grid-template-columns: 64px minmax(0, 1fr) 72px;
+    grid-template-columns: 52px minmax(0, 1fr) 68px;
     align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
+    gap: 7px;
+    padding: 5px 10px;
   }
 
   .featured-course-preview h2 {
-    font-size: 1.02rem;
+    font-size: 0.92rem;
   }
 
   .featured-course-stamp {
-    width: 64px;
-    height: 64px;
-    font-size: 0.84rem;
+    width: 48px;
+    height: 48px;
+    font-size: 0.98rem;
   }
 
   .featured-course-link {
-    min-height: 34px;
-    padding: 0 8px;
-    font-size: 0.76rem;
+    min-height: 30px;
+    padding: 0 7px;
+    font-size: 0.82rem;
     white-space: nowrap;
   }
 
