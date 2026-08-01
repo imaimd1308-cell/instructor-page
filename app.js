@@ -87,9 +87,12 @@ function isBetween(start, end) {
 }
 
 function normalizeCourse(row) {
+  const featuredType = (row[columns.featured] || "").trim().toUpperCase();
+
   return {
     visible: row[columns.visible] === "T",
-    featured: row[columns.featured] === "T",
+    featured: featuredType === "T" || featuredType === "S",
+    featuredType,
     title: row[columns.title],
     organization: row[columns.organization],
     target: row[columns.target],
@@ -197,7 +200,7 @@ function renderFeaturedCourse(courses) {
   featuredCourse = featuredCourses[0];
   target.innerHTML = featuredCourses.map((featured, index) => `
     <article class="featured-course-item">
-    <span class="featured-course-stamp">신규</span>
+    <span class="featured-course-stamp ${featured.featuredType === "S" ? "special" : ""}">${featured.featuredType === "S" ? "특강" : "신규"}</span>
     <div class="featured-course-copy">
       <h2>${escapeHtml(featured.title)}</h2>
       <p class="featured-course-date">강의 시작 <strong>${formatDate(featured.courseStart)}</strong></p>

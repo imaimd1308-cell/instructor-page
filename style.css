@@ -281,6 +281,11 @@ h1 {
   box-shadow: 0 7px 16px rgba(73, 16, 23, 0.26);
 }
 
+.featured-course-stamp.special {
+  background: linear-gradient(135deg, #2dbf7c, #0f8f5b);
+  box-shadow: 0 7px 16px rgba(12, 93, 63, 0.28);
+}
+
 .featured-course-link {
   border: 0;
   cursor: pointer;
