@@ -38,9 +38,7 @@ body {
 }
 
 body[data-page="history"] {
-  background:
-    radial-gradient(circle at top right, rgba(125, 216, 255, 0.2), transparent 24rem),
-    linear-gradient(180deg, #07182f 0, #0b1e39 319px, var(--paper) 320px);
+  background: var(--paper);
 }
 
 .page {
@@ -372,7 +370,12 @@ h1 {
 }
 
 .history-hero {
-  padding: 18px 0 20px;
+  padding: 18px 0 18px;
+  background:
+    radial-gradient(circle at top right, rgba(125, 216, 255, 0.2), transparent 24rem),
+    linear-gradient(180deg, #07182f 0, #0b1e39 100%);
+  box-shadow: 0 0 0 100vmax #0b1e39;
+  clip-path: inset(0 -100vmax);
   color: #fff;
 }
 
@@ -384,6 +387,15 @@ h1 {
   margin-top: 12px;
   color: rgba(255, 255, 255, 0.76);
   line-height: 1.6;
+}
+
+.history-hero .section-title {
+  margin-top: 22px;
+  margin-bottom: 0;
+}
+
+.history-hero .section-title h2 {
+  color: #ffffff;
 }
 
 .back-link {
@@ -572,8 +584,8 @@ h1 {
   font-weight: 850;
 }
 
-body[data-page="history"] #past-section .section-title {
-  margin-bottom: 16px;
+body[data-page="history"] #past-section {
+  margin-top: 16px;
 }
 
 h2 {
@@ -927,6 +939,37 @@ h2 {
   .hero-actions .history-action {
     background: #f4c95d;
     color: #07182f;
+  }
+
+  .back-link {
+    background: #f4c95d;
+    color: #07182f;
+    box-shadow: 0 10px 22px rgba(201, 162, 74, 0.26);
+  }
+
+  .history-hero .section-title {
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+
+  .history-hero .section-title h2 {
+    flex: 1 1 auto;
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  .history-hero .section-title span {
+    margin-left: 4px;
+  }
+
+  .history-hero .history-filter {
+    flex: 0 0 116px;
+    min-width: 116px;
+    max-width: 116px;
+    height: 34px;
+    padding-left: 9px;
+    font-size: 0.78rem;
   }
 
   .stats {
