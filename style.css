@@ -959,9 +959,9 @@ h2 {
     white-space: nowrap;
   }
 
-  .history-hero .section-title span {
-    margin-left: 4px;
-  }
+.history-hero .section-title span {
+  margin-left: 0;
+}
 
   .history-hero .history-filter {
     flex: 0 0 116px;
