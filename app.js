@@ -188,7 +188,13 @@ function renderFeaturedCourse(courses) {
   if (!target) return;
   featuredCourses = courses
     .filter((course) => course.featured && (!course.applyEnd || today <= course.applyEnd))
-    .sort((a, b) => a.sort - b.sort);
+    .sort((a, b) => {
+      if (a.featuredType !== b.featuredType) {
+        if (a.featuredType === "S") return -1;
+        if (b.featuredType === "S") return 1;
+      }
+      return a.sort - b.sort;
+    });
 
   if (!featuredCourses.length) {
     target.hidden = true;
