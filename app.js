@@ -29,6 +29,7 @@ let activeCourses = [];
 let pastCourses = [];
 let featuredCourse = null;
 let featuredCourses = [];
+const pageType = document.body.dataset.page || "home";
 
 function parseCsv(text) {
   const rows = [];
@@ -173,6 +174,7 @@ function courseCard(course) {
 
 function renderList(id, courses, emptyText) {
   const target = document.querySelector(`#${id}`);
+  if (!target) return;
   target.innerHTML = courses.length
     ? courses.map(courseCard).join("")
     : `<div class="empty">${emptyText}</div>`;
@@ -180,6 +182,7 @@ function renderList(id, courses, emptyText) {
 
 function renderFeaturedCourse(courses) {
   const target = document.querySelector("#featuredCourse");
+  if (!target) return;
   featuredCourses = courses
     .filter((course) => course.featured && (!course.applyEnd || today <= course.applyEnd))
     .sort((a, b) => a.sort - b.sort);
@@ -251,6 +254,7 @@ function courseRow(course, index) {
 
 function renderCompactList(id, courses, emptyText, indexOffset) {
   const target = document.querySelector(`#${id}`);
+  if (!target) return;
   target.innerHTML = courses.length
     ? courses.map((course, index) => courseRow(course, index + indexOffset)).join("")
     : `<div class="empty">${emptyText}</div>`;
@@ -261,12 +265,14 @@ function renderHistory(filter = "") {
     ? pastCourses.filter((course) => course.organization === filter).sort(compareByCourseStartDesc)
     : [...pastCourses].sort(compareByCourseStartDesc);
 
-  detailCourses = [...activeCourses, ...filteredPast];
-  renderCompactList("pastCourses", filteredPast, "조건에 맞는 강의 이력이 없습니다.", activeCourses.length);
+  const indexOffset = document.querySelector("#activeCourses") ? activeCourses.length : 0;
+  detailCourses = document.querySelector("#activeCourses") ? [...activeCourses, ...filteredPast] : filteredPast;
+  renderCompactList("pastCourses", filteredPast, "조건에 맞는 강의 이력이 없습니다.", indexOffset);
 }
 
 function renderHistoryFilter(courses) {
   const filter = document.querySelector("#historyFilter");
+  if (!filter) return;
   const organizations = [...new Set(courses.map((course) => course.organization).filter(Boolean))].sort((a, b) =>
     a.localeCompare(b, "ko")
   );
@@ -278,10 +284,11 @@ function renderHistoryFilter(courses) {
 }
 
 function renderStats(courses, open, active, past) {
-  document.querySelector("#stats").innerHTML = `
+  const target = document.querySelector("#stats");
+  if (!target) return;
+  target.innerHTML = `
     <a class="stat-card" href="#open-section"><span class="stat-open">모집중</span><strong>${open.length}</strong></a>
     <a class="stat-card" href="#active-section"><span class="stat-now">진행중</span><strong>${active.length}</strong></a>
-    <a class="stat-card" href="#past-section"><span class="stat-archive">강의 이력</span><strong>${past.length}</strong></a>
   `;
 }
 
@@ -360,7 +367,7 @@ document.addEventListener("click", (event) => {
   document.querySelector("#courseModal").setAttribute("aria-hidden", "true");
 });
 
-document.querySelector("#historyFilter").addEventListener("change", (event) => {
+document.querySelector("#historyFilter")?.addEventListener("change", (event) => {
   renderHistory(event.target.value);
 });
 
@@ -372,16 +379,22 @@ async function init() {
     const { open, active, past } = classify(courses);
     activeCourses = active;
     pastCourses = past;
-    detailCourses = [...activeCourses, ...pastCourses];
 
+    if (pageType === "history") {
+      detailCourses = pastCourses;
+      renderHistoryFilter(courses);
+      renderHistory();
+      return;
+    }
+
+    detailCourses = activeCourses;
     renderFeaturedCourse(courses);
     renderStats(courses, open, active, past);
     renderList("openCourses", open, "현재 신청 가능한 강의가 없습니다.");
     renderCompactList("activeCourses", active, "현재 진행 중인 강의가 없습니다.", 0);
-    renderHistoryFilter(courses);
-    renderHistory();
   } catch (error) {
-    document.querySelector("#stats").innerHTML = `<div class="empty">구글시트 데이터를 불러오지 못했습니다.</div>`;
+    const fallback = document.querySelector("#stats") || document.querySelector("#pastCourses");
+    if (fallback) fallback.innerHTML = `<div class="empty">구글시트 데이터를 불러오지 못했습니다.</div>`;
   }
 }
 

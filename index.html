@@ -6,7 +6,7 @@
     <title>강의 포트폴리오</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
+  <body data-page="home">
     <main class="page">
       <section class="hero">
         <div class="hero-grid">
@@ -22,9 +22,10 @@
               <img class="hero-photo" src="./profile-photo-new.png" alt="시디놀 임만식 프로필 사진" />
             </div>
             <div class="hero-actions">
-              <a href="#open-section">수강 신청</a>
-              <a href="tel:01037876305">전화 문의</a>
-              <a href="mailto:imssjs@hanmail.net?subject=강의 문의">메일 문의</a>
+              <a href="#open-section">수강신청</a>
+              <a href="tel:01037876305">전화문의</a>
+              <a href="mailto:imssjs@hanmail.net?subject=강의 문의">메일문의</a>
+              <a class="history-action" href="./history.html">강의이력</a>
             </div>
           </div>
           <aside class="profile-card" aria-label="강사 요약">
@@ -105,16 +106,6 @@
           <h2>진행 강의 <span class="label-now">Now</span></h2>
         </div>
         <div class="course-list compact" id="activeCourses"></div>
-      </section>
-
-      <section class="course-section" id="past-section">
-        <div class="section-title">
-          <h2>강의 이력 <span class="label-archive">Archive</span></h2>
-          <select class="history-filter" id="historyFilter" aria-label="강의 이력 기관 필터">
-            <option value="">전체 기관</option>
-          </select>
-        </div>
-        <div class="course-list compact" id="pastCourses"></div>
       </section>
     </main>
 

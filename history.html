@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>강의 이력 | 시디놀</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-page="history">
+    <main class="page history-page">
+      <section class="history-hero">
+        <a class="back-link" href="./index.html">← 포트폴리오</a>
+        <p class="eyebrow">SIDINOL · Lecture Archive</p>
+        <h1>강의 이력</h1>
+        <p>시디놀(임만식)이 진행해 온 디지털·AI 강의 기록입니다.</p>
+      </section>
+
+      <section class="course-section" id="past-section">
+        <div class="section-title">
+          <h2>전체 강의 이력 <span class="label-archive">Archive</span></h2>
+          <select class="history-filter" id="historyFilter" aria-label="강의 이력 기관 필터">
+            <option value="">전체 기관</option>
+          </select>
+        </div>
+        <div class="course-list compact" id="pastCourses"></div>
+      </section>
+    </main>
+
+    <div class="modal" id="courseModal" aria-hidden="true">
+      <div class="modal-backdrop" data-close-modal></div>
+      <article class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" type="button" aria-label="닫기" data-close-modal>×</button>
+        <div class="badge-row" id="modalBadges"></div>
+        <h3 id="modalTitle"></h3>
+        <div class="modal-meta" id="modalMeta"></div>
+        <p class="modal-summary" id="modalSummary"></p>
+        <div class="tag-row" id="modalTags"></div>
+        <div id="modalApply"></div>
+      </article>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
