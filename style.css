@@ -136,6 +136,15 @@ h1 {
   font-weight: 900;
 }
 
+.hero-actions a {
+  overflow: hidden;
+  text-overflow: clip;
+  white-space: nowrap;
+  word-break: keep-all;
+  font-size: 0.98rem;
+  line-height: 1;
+}
+
 .hero-actions a + a {
   background: rgba(255, 255, 255, 0.12);
   color: #fff;
@@ -932,8 +941,12 @@ h2 {
   .hero-actions a {
     min-height: 36px;
     padding: 0 3px;
-    font-size: 0.72rem;
+    font-size: 0.86rem;
+    line-height: 1;
+    overflow: hidden;
+    text-overflow: clip;
     white-space: nowrap;
+    word-break: keep-all;
   }
 
   .hero-actions .history-action {
