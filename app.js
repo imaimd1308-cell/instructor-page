@@ -91,7 +91,7 @@ function normalizeCourse(row) {
 
   return {
     visible: row[columns.visible] === "T",
-    featured: featuredType === "T" || featuredType === "S",
+    featured: featuredType === "N" || featuredType === "S",
     featuredType,
     title: row[columns.title],
     organization: row[columns.organization],
