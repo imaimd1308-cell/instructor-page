@@ -273,6 +273,8 @@ function renderHistory(filter = "") {
   const filteredPast = filter
     ? pastCourses.filter((course) => course.organization === filter).sort(compareByCourseStartDesc)
     : [...pastCourses].sort(compareByCourseStartDesc);
+  const archiveCount = document.querySelector("#archiveCount");
+  if (archiveCount) archiveCount.textContent = filteredPast.length;
 
   const indexOffset = document.querySelector("#activeCourses") ? activeCourses.length : 0;
   detailCourses = document.querySelector("#activeCourses") ? [...activeCourses, ...filteredPast] : filteredPast;

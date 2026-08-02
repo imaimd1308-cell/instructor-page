@@ -165,7 +165,7 @@ h1 {
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
   background: linear-gradient(160deg, #12365f 0%, #1d5d8f 100%);
-  padding: 14px 22px 22px;
+  padding: 12px 20px 16px;
   backdrop-filter: blur(14px);
   box-shadow: 0 22px 42px rgba(4, 17, 35, 0.28);
   transform: translateY(-6px);
@@ -173,7 +173,7 @@ h1 {
 
 .profile-card strong {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: #ffffff;
   font-size: 1.18rem;
 }
@@ -187,7 +187,7 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
 .profile-links a {
@@ -589,6 +589,13 @@ h1 {
   color: var(--gold);
 }
 
+.archive-count {
+  margin-left: 8px;
+  color: #ffffff;
+  font-size: 0.8em;
+  font-weight: 950;
+}
+
 .history-filter {
   min-width: 142px;
   max-width: 46%;
@@ -599,7 +606,7 @@ h1 {
   background: #fff;
   color: var(--navy);
   font: inherit;
-  font-size: 0.88rem;
+  font-size: 1rem;
   font-weight: 850;
 }
 
@@ -622,6 +629,10 @@ h2 {
 .course-list.compact {
   grid-template-columns: 1fr;
   gap: 10px;
+}
+
+body[data-page="history"] .course-list.compact {
+  gap: 5px;
 }
 
 .course-card {
@@ -993,12 +1004,12 @@ h2 {
 }
 
   .history-hero .history-filter {
-    flex: 0 0 116px;
-    min-width: 116px;
-    max-width: 116px;
-    height: 34px;
+    flex: 0 0 132px;
+    min-width: 132px;
+    max-width: 132px;
+    height: 36px;
     padding-left: 9px;
-    font-size: 0.78rem;
+    font-size: 1rem;
   }
 
   .stats {
