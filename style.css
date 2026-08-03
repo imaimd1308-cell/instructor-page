@@ -225,7 +225,7 @@ h1 {
 .featured-course-preview {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
   margin: 0 0 10px;
   overflow: visible;
 }
@@ -1053,14 +1053,14 @@ body[data-page="history"] .course-list.compact {
   }
 
   .featured-course-preview {
-    gap: 10px;
+    gap: 5px;
   }
 
   .featured-course-item {
-    grid-template-columns: 52px minmax(0, 1fr) 40px;
+    grid-template-columns: 36px minmax(0, 1fr) 36px;
     align-items: center;
     gap: 7px;
-    padding: 5px 10px;
+    padding: 3px 10px;
   }
 
   .featured-course-preview h2 {
@@ -1068,18 +1068,18 @@ body[data-page="history"] .course-list.compact {
   }
 
   .featured-course-stamp {
-    width: 48px;
-    height: 48px;
-    font-size: 0.98rem;
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
   }
 
   .featured-course-link {
-    width: 40px;
-    height: 40px;
-    min-height: 40px;
-    min-width: 40px;
+    width: 36px;
+    height: 36px;
+    min-height: 36px;
+    min-width: 36px;
     padding: 0;
-    font-size: 0.98rem;
+    font-size: 0.9rem;
     white-space: nowrap;
   }
 
