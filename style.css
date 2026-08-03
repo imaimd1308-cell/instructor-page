@@ -1057,7 +1057,7 @@ body[data-page="history"] .course-list.compact {
   }
 
   .featured-course-item {
-    grid-template-columns: 36px minmax(0, 1fr) 36px;
+    grid-template-columns: 38px minmax(0, 1fr) 36px;
     align-items: center;
     gap: 7px;
     padding: 3px 10px;
