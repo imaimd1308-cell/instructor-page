@@ -297,7 +297,7 @@ h1 {
   align-items: center;
   justify-content: center;
   justify-self: end;
-  min-height: 34px;
+  min-height: 40px;
   min-width: 50px;
   padding: 0 9px;
   border-radius: 8px;
@@ -1074,10 +1074,10 @@ body[data-page="history"] .course-list.compact {
   }
 
   .featured-course-link {
-    width: 36px;
-    height: 36px;
-    min-height: 36px;
-    min-width: 36px;
+    width: 32px;
+    height: 32px;
+    min-height: 32px;
+    min-width: 32px;
     padding: 0;
     font-size: 0.9rem;
     white-space: nowrap;
