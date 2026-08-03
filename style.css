@@ -27,7 +27,7 @@ body {
   margin: 0;
   background:
     radial-gradient(circle at top right, rgba(125, 216, 255, 0.24), transparent 28rem),
-    linear-gradient(180deg, #07182f 0, #0b1e39 440px, var(--paper) 441px);
+    linear-gradient(180deg, #07182f 0, #0b1e39 426px, var(--paper) 427px);
   color: var(--ink);
   font-family:
     Pretendard,
@@ -165,7 +165,7 @@ h1 {
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
   background: linear-gradient(160deg, #12365f 0%, #1d5d8f 100%);
-  padding: 12px 20px 16px;
+  padding: 8px 20px 10px;
   backdrop-filter: blur(14px);
   box-shadow: 0 22px 42px rgba(4, 17, 35, 0.28);
   transform: translateY(-6px);
@@ -173,7 +173,7 @@ h1 {
 
 .profile-card strong {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   color: #ffffff;
   font-size: 1.18rem;
 }
@@ -186,8 +186,9 @@ h1 {
 .profile-links {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 6px;
-  margin-top: 14px;
+  margin-top: 8px;
 }
 
 .profile-links a {
@@ -196,6 +197,8 @@ h1 {
   justify-content: center;
   width: 38px;
   height: 38px;
+  min-height: 38px;
+  padding: 0;
   border-radius: 50%;
   background: #ffffff;
   color: #06152b;
@@ -926,6 +929,12 @@ body[data-page="history"] .course-list.compact {
 }
 
 @media (max-width: 720px) {
+  body {
+    background:
+      radial-gradient(circle at top right, rgba(125, 216, 255, 0.24), transparent 28rem),
+      linear-gradient(180deg, #07182f 0, #0b1e39 426px, var(--paper) 427px);
+  }
+
   .page {
     padding: 20px 16px 48px;
   }
@@ -984,6 +993,19 @@ body[data-page="history"] .course-list.compact {
   .hero-actions .icon-action svg {
     width: 21px;
     height: 21px;
+  }
+
+  .profile-card {
+    padding: 8px 20px 10px;
+  }
+
+  .profile-card strong {
+    margin-bottom: 6px;
+  }
+
+  .profile-links {
+    justify-content: center;
+    margin-top: 8px;
   }
 
   .back-link {
