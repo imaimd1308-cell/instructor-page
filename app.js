@@ -211,7 +211,7 @@ function renderFeaturedCourse(courses) {
       <h2>${escapeHtml(featured.title)}</h2>
       <p class="featured-course-date">강의 시작 <strong>${formatDate(featured.courseStart)}</strong></p>
     </div>
-    <button class="featured-course-link" type="button" data-featured-course>강의 보기</button>
+    <button class="featured-course-link" type="button" data-featured-course>보기</button>
     </article>
   `).join("");
 }
