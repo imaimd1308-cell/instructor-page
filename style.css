@@ -151,7 +151,8 @@ h1 {
   box-shadow: 0 10px 22px rgba(201, 162, 74, 0.26);
 }
 
-.hero-actions .icon-action svg {
+.hero-actions .icon-action svg,
+.profile-links .contact-link svg {
   width: 22px;
   height: 22px;
   fill: none;
@@ -187,11 +188,12 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   margin-top: 8px;
 }
 
-.profile-links a {
+.profile-links a,
+.profile-links button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -209,16 +211,28 @@ h1 {
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
 }
 
+.profile-links button {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
 .brand-link img {
   width: 19px;
   height: 19px;
   display: block;
 }
 
+.profile-links .contact-link {
+  color: #12365f;
+}
+
 .profile-links .news-link {
   position: relative;
   width: 52px;
   border-radius: 8px;
+  padding: 0 10px;
+  min-height: 38px;
   color: var(--navy);
 }
 
@@ -318,22 +332,6 @@ h1 {
   line-height: 1;
   white-space: nowrap;
   writing-mode: horizontal-tb;
-}
-
-.news-link span {
-  position: absolute;
-  right: -3px;
-  bottom: -3px;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--blue);
-  color: #fff;
-  font-size: 0.72rem;
-  font-weight: 950;
 }
 
 .stats {
@@ -930,6 +928,28 @@ body[data-page="history"] .course-list.compact {
   line-height: 1.65;
 }
 
+.news-modal-panel {
+  max-width: 360px;
+}
+
+.news-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.news-list a {
+  display: flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 0 14px;
+  border-radius: 8px;
+  background: #eef3f8;
+  color: var(--navy);
+  font-weight: 900;
+  text-decoration: none;
+}
+
 @media (max-width: 720px) {
   body {
     background:
@@ -1006,7 +1026,7 @@ body[data-page="history"] .course-list.compact {
   }
 
   .profile-links {
-    justify-content: center;
+    gap: 8px;
     margin-top: 8px;
   }
 

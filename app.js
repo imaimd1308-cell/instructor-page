@@ -354,6 +354,12 @@ document.addEventListener("click", (event) => {
 });
 
 document.addEventListener("click", (event) => {
+  if (!event.target.closest("[data-news-modal]")) return;
+  document.querySelector("#newsModal").classList.add("is-open");
+  document.querySelector("#newsModal").setAttribute("aria-hidden", "false");
+});
+
+document.addEventListener("click", (event) => {
   const row = event.target.closest("[data-course-index]");
   if (!row) return;
 
@@ -376,6 +382,12 @@ document.addEventListener("click", (event) => {
   if (!event.target.closest("[data-close-modal]")) return;
   document.querySelector("#courseModal").classList.remove("is-open");
   document.querySelector("#courseModal").setAttribute("aria-hidden", "true");
+});
+
+document.addEventListener("click", (event) => {
+  if (!event.target.closest("[data-close-news-modal]")) return;
+  document.querySelector("#newsModal").classList.remove("is-open");
+  document.querySelector("#newsModal").setAttribute("aria-hidden", "true");
 });
 
 document.querySelector("#historyFilter")?.addEventListener("change", (event) => {
