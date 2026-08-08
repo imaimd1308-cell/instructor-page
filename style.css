@@ -151,6 +151,11 @@ h1 {
   box-shadow: 0 10px 22px rgba(201, 162, 74, 0.26);
 }
 
+.hero-actions .consult-action {
+  background: #eaf6ff;
+  color: #07182f;
+}
+
 .hero-actions .icon-action svg,
 .profile-links .contact-link svg {
   width: 22px;
